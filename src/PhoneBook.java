@@ -1,7 +1,7 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Map.Entry.comparingByValue;
 
 public class PhoneBook {
     /**
@@ -33,24 +33,41 @@ public class PhoneBook {
     }
 
     public void printBook() {
-//        hashMap.entrySet().stream()
-//                .sorted(Map.Entry.comparingByKey())
-//                .forEach(System.out::println);
         ArrayList<Integer> sort = new ArrayList<>();
         for (ArrayList<Integer> item : hashMap.values()) {
-//            System.out.println(item);
             sort.add(item.size());
         }
         sort.sort(Comparator.reverseOrder());
         for (int i = 0; i < sort.size(); i++) {
             for (Map.Entry<String, ArrayList<Integer>> entry : hashMap.entrySet()) {
                 if (sort.get(i) == entry.getValue().size()) {
-                    System.out.printf("Имя: %s \n Телефоны: %s \n",entry.getKey(), entry.getValue());
+                    System.out.printf("Имя: %s \n Телефоны: %s \n", entry.getKey(), entry.getValue());
                 }
             }
         }
-//        hashMap.entrySet().stream()
-//                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-//                .forEach(System.out::println);
+    }
+
+    public void print() {
+        ArrayList<Integer> sort = new ArrayList<>();
+        for (ArrayList<Integer> item : hashMap.values()) {
+            sort.add(item.size());
+        }
+        sort.sort(Comparator.reverseOrder());
+        int i = 0;
+        while (i < (sort.size() - 1)) {
+//        for (int i = 0; i < sort.size(); i++) {
+            for (Map.Entry<String, ArrayList<Integer>> entry : hashMap.entrySet()) {
+                if (sort.get(i) == entry.getValue().size()) {
+                    i++;
+                    System.out.printf("Имя: %s \n Телефоны: %s \n", entry.getKey(), entry.getValue());
+                }
+            }
+        }
+    }
+
+    public void printAll() {
+        hashMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue((o1, o2) -> o2.size() - o1.size()))
+                .forEach(n -> System.out.printf("Имя: %s \n Телефоны: %s \n", n.getKey(), n.getValue()));
     }
 }

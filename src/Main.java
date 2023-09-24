@@ -30,6 +30,8 @@ public class Main {
 
         phoneBook.add("Vasiliev", 234433);
         phoneBook.add("Vasiliev", 233);
-        phoneBook.printBook();
+//        phoneBook.printBook();
+//        phoneBook.print();
+        phoneBook.printAll();
     }
 }
